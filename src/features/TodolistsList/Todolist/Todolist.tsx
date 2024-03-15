@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect } from "react"
-import { AddItemForm } from "../../../components/AddItemForm/AddItemForm"
-import { EditableSpan } from "../../../components/EditableSpan/EditableSpan"
+import { AddItemForm } from "components/AddItemForm/AddItemForm"
+import { EditableSpan } from "components/EditableSpan/EditableSpan"
 import { Task } from "./Task/Task"
-import { TaskStatuses, TaskType } from "../../../api/todolists-api"
+import { TaskStatuses, TaskType } from "api/todolists-api"
 import { FilterValuesType, TodolistDomainType } from "../todolists-reducer"
 import { fetchTasksTC } from "../tasks-reducer"
-import { useAppDispatch } from "../../../hooks/useAppDispatch"
+import { useAppDispatch } from "hooks/useAppDispatch"
 import { Button, IconButton } from "@mui/material"
 import { Delete } from "@mui/icons-material"
 
@@ -25,13 +25,13 @@ type PropsType = {
 export const Todolist = React.memo(function ({ demo = false, ...props }: PropsType) {
   const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    if (demo) {
-      return
-    }
-    const thunk = fetchTasksTC(props.todolist.id)
-    dispatch(thunk)
-  }, [])
+  // useEffect(() => {
+  //   if (demo) {
+  //     return
+  //   }
+  //   const thunk = fetchTasksTC(props.todolist.id)
+  //   dispatch(thunk)
+  // }, [])
 
   const addTask = useCallback(
     (title: string) => {
@@ -82,7 +82,7 @@ export const Todolist = React.memo(function ({ demo = false, ...props }: PropsTy
       </h3>
       <AddItemForm addItem={addTask} disabled={props.todolist.entityStatus === "loading"} />
       <div>
-        {tasksForTodolist.map((t) => (
+        {tasksForTodolist?.map((t) => (
           <Task
             key={t.id}
             task={t}
