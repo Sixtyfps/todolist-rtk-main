@@ -3,8 +3,8 @@ import { handleServerAppError, handleServerNetworkError } from "utils/error-util
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { AppThunk } from "app/store"
 import { appActions } from "app/appSlice"
-import { tasksActions } from "features/TodolistsList/tasks-reducer"
-import { todolistsActions } from "features/TodolistsList/todolists-reducer"
+import { tasksActions } from "features/TodolistsList/tasksSlice"
+import { todolistsActions } from "features/TodolistsList/todolistsSlice"
 
 const slice = createSlice({
   name: "auth",
