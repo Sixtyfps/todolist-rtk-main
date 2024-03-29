@@ -1,9 +1,9 @@
 import { todolistsAPI, TodolistType } from "api/todolists-api"
 import { appActions, RequestStatusType } from "app/appSlice"
-import { handleServerNetworkError } from "utils/error-utils"
 import { AppThunk } from "app/store"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { tasksThunks } from "features/TodolistsList/tasksSlice"
+import { handleServerNetworkError } from "utils"
 
 const slice = createSlice({
   name: "todolists",

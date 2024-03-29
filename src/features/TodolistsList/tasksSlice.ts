@@ -7,11 +7,11 @@ import {
   UpdateTaskModelType,
 } from "api/todolists-api"
 import { AppThunk } from "app/store"
-import { handleServerAppError, handleServerNetworkError } from "utils/error-utils"
 import { appActions } from "app/appSlice"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { todolistsActions } from "features/TodolistsList/todolistsSlice"
 import { createAppAsyncThunk } from "utils/createAppAsyncThunk"
+import { handleServerAppError, handleServerNetworkError } from "utils"
 
 const slice = createSlice({
   name: "tasks",
