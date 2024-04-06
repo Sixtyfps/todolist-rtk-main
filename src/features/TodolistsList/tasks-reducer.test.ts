@@ -1,4 +1,4 @@
-import { tasksActions, tasks, TasksStateType, tasksThunks } from "features/TodolistsList/tasksSlice"
+import { tasks, TasksStateType, tasksThunks } from "features/TodolistsList/tasksSlice"
 import { TaskPriorities, TaskStatuses } from "api/todolists-api"
 import { todolistsActions } from "features/TodolistsList/todolistsSlice"
 
@@ -85,7 +85,12 @@ beforeEach(() => {
 })
 
 test("correct task should be deleted from correct array", () => {
-  const action = tasksActions.removeTask({ taskId: "2", todolistId: "todolistId2" })
+  const payload = {
+    taskId: "2",
+    domainModel: { title: "yogurt" },
+    todolistId: "todolistId2",
+  }
+  const action = tasksThunks.removeTask.fulfilled(payload, 're', payload )
 
   const endState = tasks(startState, action)
 
@@ -202,7 +207,7 @@ test("tasks should be added for todolist", () => {
   const action = tasksThunks.fetchTasks.fulfilled(
     { tasks: startState["todolistId1"], todolistId: "todolistId1" },
     "requestId",
-    "todolistId1",
+      {todolistId: "todolistId1"},
   )
 
   const endState = tasks(

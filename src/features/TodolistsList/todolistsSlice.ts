@@ -62,7 +62,7 @@ export const fetchTodolistsTC = (): AppThunk => {
       })
       .then((todos) => {
         todos.forEach((tl) => {
-          dispatch(tasksThunks.fetchTasks(tl.id))
+          dispatch(tasksThunks.fetchTasks({todolistId:tl.id}))
         })
       })
       .catch((error) => {
