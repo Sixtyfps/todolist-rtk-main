@@ -2,7 +2,7 @@ import {
   FilterValuesType,
   TodolistDomainType,
   todolistsActions,
-  todolistsSlice,
+  todolistsSlice, todolistsThunks,
 } from "features/TodolistsList/todolistsSlice"
 import { v1 } from "uuid"
 import { TodolistType } from "api/todolists-api"
@@ -65,7 +65,21 @@ test("correct filter of todolist should be changed", () => {
   expect(endState[1].filter).toBe(newFilter)
 })
 test("todolists should be added", () => {
-  const action = todolistsActions.setTodolists({ todolists: startState })
+  const payload = {
+    todolists: [
+      { id: 'todoid1',
+        title: 'Todo1',
+        addedDate: '123',
+        order: 1
+      },
+      { id: 'todoid2',
+        title: 'Todo2',
+        addedDate: '456',
+        order: 2
+      }
+    ]
+  }
+  const action = todolistsThunks.fetchTodolists.fulfilled(payload, 'requestId')
 
   const endState = todolistsSlice([], action)
 

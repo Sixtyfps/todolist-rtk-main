@@ -1,22 +1,22 @@
-import React, { useCallback, useEffect } from "react"
-import { useSelector } from "react-redux"
-import { AppRootStateType } from "app/store"
+import React, {useCallback, useEffect} from "react"
+import {useSelector} from "react-redux"
+import {AppRootStateType} from "app/store"
 import {
   addTodolistTC,
   changeTodolistTitleTC,
-  fetchTodolistsTC,
   FilterValuesType,
   removeTodolistTC,
   TodolistDomainType,
   todolistsActions,
+  todolistsThunks,
 } from "features/TodolistsList/todolistsSlice"
-import { TasksStateType, tasksThunks } from "features/TodolistsList/tasksSlice"
-import { TaskStatuses } from "api/todolists-api"
-import { Grid, Paper } from "@mui/material"
-import { AddItemForm } from "components/AddItemForm/AddItemForm"
-import { Todolist } from "./Todolist/Todolist"
-import { Navigate } from "react-router-dom"
-import { useAppDispatch } from "hooks/useAppDispatch"
+import {TasksStateType, tasksThunks} from "features/TodolistsList/tasksSlice"
+import {TaskStatuses} from "api/todolists-api"
+import {Grid, Paper} from "@mui/material"
+import {AddItemForm} from "components/AddItemForm/AddItemForm"
+import {Todolist} from "./Todolist/Todolist"
+import {Navigate} from "react-router-dom"
+import {useAppDispatch} from "hooks/useAppDispatch"
 
 type PropsType = {
   demo?: boolean
@@ -33,8 +33,8 @@ export const TodolistsList: React.FC<PropsType> = ({ demo = false }) => {
     if (demo || !isLoggedIn) {
       return
     }
-    const thunk = fetchTodolistsTC()
-    dispatch(thunk)
+
+    dispatch(todolistsThunks.fetchTodolists())
   }, [])
   const removeTask = useCallback(function (id: string, todolistId: string) {
     dispatch(tasksThunks.removeTask({taskId: id, todolistId}))
