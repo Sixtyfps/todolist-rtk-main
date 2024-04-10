@@ -82,6 +82,13 @@ export type ResponseType<D = {}> = {
   messages: Array<string>
   data: D
 }
+
+export const ResultCode = {
+  success: 0,
+  error: 1,
+  captcha: 10
+} as const
+
 export enum TaskStatuses {
   New = 0,
   InProgress = 1,

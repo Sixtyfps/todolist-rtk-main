@@ -1,5 +1,5 @@
 import {
-    AddTaskArgs,
+    AddTaskArgs, ResultCode,
     TaskPriorities,
     TaskStatuses,
     TaskType,
@@ -92,7 +92,7 @@ export const removeTask = createAppAsyncThunk<{ taskId: string, todolistId: stri
         try {
             dispatch(appActions.setAppStatus({status: "loading"}))
             const res = await todolistsAPI.deleteTask(arg.todolistId, arg.taskId)
-            if (res.data.resultCode === 0) {
+            if (res.data.resultCode === ResultCode.success) {
                 dispatch(appActions.setAppStatus({status: "succeeded"}))
                 return {taskId: arg.taskId, todolistId: arg.todolistId}
             } else {
@@ -123,7 +123,7 @@ const addTask = createAppAsyncThunk<{ task: TaskType }, AddTaskArgs>(
         try {
             dispatch(appActions.setAppStatus({status: "loading"}))
             const res = await todolistsAPI.createTask(arg)
-            if (res.data.resultCode === 0) {
+            if (res.data.resultCode === ResultCode.success) {
                 const task = res.data.data.item
                 dispatch(appActions.setAppStatus({status: "succeeded"}))
                 return {task}
@@ -160,7 +160,7 @@ export const updateTask = createAppAsyncThunk<updateTaskArg, updateTaskArg>(
             }
 
             const res = await todolistsAPI.updateTask(arg.todolistId, arg.taskId, apiModel)
-            if (res.data.resultCode === 0) {
+            if (res.data.resultCode === ResultCode.success) {
                 return arg
             } else {
                 handleServerAppError(res.data, dispatch)
