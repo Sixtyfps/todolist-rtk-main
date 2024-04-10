@@ -1,6 +1,6 @@
-import { tasks, TasksStateType, tasksThunks } from "features/TodolistsList/tasksSlice"
-import { TaskPriorities, TaskStatuses } from "api/todolists-api"
-import {todolistsActions, todolistsThunks} from "features/TodolistsList/todolistsSlice"
+import {tasks, TasksStateType, tasksThunks} from "features/TodolistsList/tasksSlice"
+import {TaskPriorities, TaskStatuses} from "api/todolists-api"
+import {todolistsThunks} from "features/TodolistsList/todolistsSlice"
 
 let startState: TasksStateType = {}
 beforeEach(() => {
@@ -155,14 +155,15 @@ test("title of specified task should be changed", () => {
   expect(endState["todolistId2"][0].title).toBe("bread")
 })
 test("new array should be added when new todolist is added", () => {
-  const action = todolistsActions.addTodolist({
+  const action = todolistsThunks.addTodolist.fulfilled({
     todolist: {
       id: "blabla",
       title: "new todolist",
       order: 0,
       addedDate: "",
-    },
-  })
+    }
+  },
+      'requestId',{title: 'Title1'})
 
   const endState = tasks(startState, action)
 

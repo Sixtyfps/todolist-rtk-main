@@ -37,7 +37,8 @@ test("correct todolist should be added", () => {
     order: 0,
   }
 
-  const endState = todolistsSlice(startState, todolistsActions.addTodolist({ todolist }))
+  const endState = todolistsSlice(startState, todolistsThunks.addTodolist.fulfilled({ todolist }, 'requestId',
+      { title: 'NewTitle' }))
 
   expect(endState.length).toBe(3)
   expect(endState[0].title).toBe(todolist.title)

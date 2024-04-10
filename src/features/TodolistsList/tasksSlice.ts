@@ -18,9 +18,9 @@ const slice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(todolistsActions.addTodolist, (state, action) => {
-                state[action.payload.todolist.id] = []
-            })
+            // .addCase(todolistsActions.addTodolist, (state, action) => {
+            //     state[action.payload.todolist.id] = []
+            // })
 
             // .addCase(todolistsActions.setTodolists, (state, action) => {
             //     action.payload.todolists.forEach((tl: any) => {
@@ -58,6 +58,9 @@ const slice = createSlice({
             })
             .addCase(todolistsThunks.removeTodolist.fulfilled, (state, action) => {
                 delete state[action.payload.id]
+            })
+            .addCase(todolistsThunks.addTodolist.fulfilled, (state, action) => {
+                state[action.payload.todolist.id] = []
             })
 
     },
