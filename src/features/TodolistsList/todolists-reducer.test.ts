@@ -22,7 +22,8 @@ beforeEach(() => {
 })
 
 test("correct todolist should be removed", () => {
-  const endState = todolistsSlice(startState, todolistsActions.removeTodolist({ id: todolistId1 }))
+  const action = todolistsThunks.removeTodolist.fulfilled({id: todolistId1}, 'request', {id: todolistId1})
+  const endState = todolistsSlice(startState, action)
 
   expect(endState.length).toBe(1)
   expect(endState[0].id).toBe(todolistId2)

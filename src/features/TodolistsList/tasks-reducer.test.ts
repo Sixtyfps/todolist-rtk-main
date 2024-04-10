@@ -175,15 +175,30 @@ test("new array should be added when new todolist is added", () => {
   expect(keys.length).toBe(3)
   expect(endState[newKey]).toEqual([])
 })
-test("propertry with todolistId should be deleted", () => {
-  const action = todolistsActions.removeTodolist({ id: "todolistId2" })
+test("property with todolistId should be deleted", () => {
+  // const payload = {
+  //   todolists: [
+  //     { id: 'todoid1',
+  //       title: 'Todo1',
+  //       addedDate: '123',
+  //       order: 1
+  //     },
+  //     { id: 'todoid2',
+  //       title: 'Todo2',
+  //       addedDate: '456',
+  //       order: 2
+  //     }
+  //   ]
+  // }
+
+  const action = todolistsThunks.removeTodolist.fulfilled({id:'todolistId1'}, 'requestId', {id: 'todolistId1'})
 
   const endState = tasks(startState, action)
 
   const keys = Object.keys(endState)
 
   expect(keys.length).toBe(1)
-  expect(endState["todolistId2"]).not.toBeDefined()
+  expect(endState["todolistId1"]).not.toBeDefined()
 })
 
 test("empty arrays should be added when we set todolists", () => {
