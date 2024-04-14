@@ -78,10 +78,12 @@ export type TodolistType = {
   order: number
 }
 export type ResponseType<D = {}> = {
-  resultCode: number
+  resultCode: ResultCodeType
   messages: Array<string>
   data: D
 }
+
+type ResultCodeType = (typeof ResultCode)[keyof typeof ResultCode]
 
 export const ResultCode = {
   success: 0,
